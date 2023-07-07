@@ -24,6 +24,11 @@ class Prompto {
     return this;
   }
 
+  withText(text: string[]): Prompto {
+    this.promptConfig.text = text;
+    return this;
+  }
+
   withSteps(steps: string[]): Prompto {
     this.promptConfig.steps = steps;
     return this;
@@ -62,7 +67,7 @@ class Prompto {
       criteria,
     } = this.promptConfig;
 
-    if (instruction === "") return "no instruction provided";
+    if (instruction === "") throw new Error("No instruction provided");
 
     let prompt = "";
 
@@ -78,7 +83,7 @@ class Prompto {
 
     if (text && text.length > 0) {
       prompt += `Here is the text you need, delimited by angle brackets: \n<\n`;
-      prompt += text.map((t) => `- ${t}\n`).join("");
+      prompt += text.map((t) => `${t}\n`).join("");
       prompt += `>\n`;
     }
 
