@@ -19,6 +19,11 @@ class Prompto {
     return this;
   }
 
+  withContext(context: string): Prompto {
+    this.promptConfig.context = context;
+    return this;
+  }
+
   withSteps(steps: string[]): Prompto {
     this.promptConfig.steps = steps;
     return this;
@@ -48,7 +53,8 @@ class Prompto {
     const {
       persona,
       instruction,
-      content,
+      context,
+      text,
       steps,
       examples,
       format,
@@ -66,9 +72,13 @@ class Prompto {
 
     prompt += `What I need you to do is the following: ${instruction}.\n`;
 
-    if (content && content.length > 0) {
-      prompt += `Here is the content you need delimited by angle brackets: \n<\n`;
-      prompt += content.map((text) => `- ${text}\n`).join("");
+    if (context) {
+      prompt += `This is the context of the instruction: ${context}.\n`;
+    }
+
+    if (text && text.length > 0) {
+      prompt += `Here is the text you need, delimited by angle brackets: \n<\n`;
+      prompt += text.map((t) => `- ${t}\n`).join("");
       prompt += `>\n`;
     }
 

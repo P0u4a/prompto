@@ -4,8 +4,10 @@ export type PromptConfig = {
   persona?: string;
   // The main instruction or request the model will fulfill
   instruction: string;
-  // Any content that the model needs to parse through
-  content?: string[];
+  // Context of the current instruction
+  context?: string;
+  // Any text that the model needs to parse through
+  text?: string[];
   // Specific set of steps required to reach the output
   steps?: string[];
   // List of examples or scenarios
