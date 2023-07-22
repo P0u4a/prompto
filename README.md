@@ -28,7 +28,7 @@ console.log(prompt);
 
 ### `Prompto()`
 
-Creates an empty Prompto object with a blank instruction.
+Creates an empty prompt config with a blank instruction.
 
 ### `withPersona(persona: string)`
 
@@ -36,7 +36,7 @@ Sets the persona that the model will take on.
 
 ### `withInstruction(question: string)`
 
-Sets the main instruction or request the model will respond to. This is a **compulsory** method. 
+Sets the main instruction or request the model will respond to. This is a **compulsory** method.
 
 ### `withContext(context: string)`
 
@@ -66,4 +66,7 @@ Adds a list of rules that the model must follow to reach its output. Helpful for
 
 Sets the tone of the response. Helpful if you're writing text that requires an appropriate tone, such as an email.
 
+### `generatePrompt()`
 
+Generates the prompt using the prompt config. This is the final method that should be called in the chain. Also clears the prompt config before returning the prompt string, allowing for the same Prompto
+instance to be used for generating different prompts.
