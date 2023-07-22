@@ -10,6 +10,11 @@ Programatically construct ChatGPT prompts with Typescript. Think of it as a SQL 
 - ✅ Resistant to prompt injection
 - ✅ Blazingly fast prompt generation
 
+## Installation
+```
+npm install ts-prompto
+```
+
 ## Usage
 
 Create a Prompto object anywhere and use method chaining to build your prompt:
