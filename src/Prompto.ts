@@ -1,7 +1,15 @@
 import type { PromptConfig } from "./types";
+import type { PromptoInterface } from "./prompto-interface";
 
-class Prompto {
+class Prompto implements PromptoInterface<Prompto> {
   private promptConfig: PromptConfig;
+
+  private clearPrompt(): void {
+    for (const key in this.promptConfig)
+      delete this.promptConfig[key as keyof PromptConfig];
+
+    this.promptConfig.instruction = "";
+  }
 
   constructor() {
     this.promptConfig = {
@@ -71,15 +79,12 @@ class Prompto {
 
     let prompt = "";
 
-    if (persona) {
-      prompt += `I want you to act as a ${persona}.\n`;
-    }
+    if (persona) prompt += `I want you to act as a ${persona}.\n`;
 
     prompt += `What I need you to do is the following: ${instruction}.\n`;
 
-    if (context) {
+    if (context)
       prompt += `This is the context of the instruction: ${context}.\n`;
-    }
 
     if (text && text.length > 0) {
       prompt += `Here is the text you need, delimited by angle brackets: \n<\n`;
@@ -99,19 +104,17 @@ class Prompto {
       prompt += `>\n`;
     }
 
-    if (format) {
-      prompt += `The response should be in this format: ${format}\n`;
-    }
+    if (format) prompt += `The response should be in this format: ${format}\n`;
 
-    if (tone) {
-      prompt += `The tone of the response should be: ${tone}\n`;
-    }
+    if (tone) prompt += `The tone of the response should be: ${tone}\n`;
 
     if (criteria && criteria.length > 0) {
       prompt += `You must follow these rules delimited by angle brackets:\n<\n`;
       prompt += criteria.map((rule) => `- ${rule}\n`).join("");
       prompt += `>\n`;
     }
+
+    this.clearPrompt();
 
     return prompt;
   }
