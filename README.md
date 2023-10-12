@@ -2,8 +2,6 @@
 
 Programatically construct ChatGPT prompts with Typescript. Think of it as a SQL query builder except instead of SQL queries, its LLM prompts.
 
-> ⚠️ Prompto is still in alpha and features are subject to change.
-
 ## Features
 
 - ✅ Zero dependencies
